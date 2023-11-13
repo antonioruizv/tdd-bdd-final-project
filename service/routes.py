@@ -98,10 +98,6 @@ def create_products():
 # L I S T   A L L   P R O D U C T S
 ######################################################################
 
-@app.route("/products", methods=["GET"])
-######################################################################
-# LIST PRODUCTS
-######################################################################
 
 @app.route("/products", methods=["GET"])
 def list_products():
@@ -138,8 +134,10 @@ def list_products():
 # R E A D   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_products(product_id):
+    """request to get a product"""
     product_found = Product.find(product_id)
     if not product_found:
         abort(status.HTTP_404_NOT_FOUND, f"Product with id '{product_id}' was not found.")
@@ -150,8 +148,10 @@ def get_products(product_id):
 # U P D A T E   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["PUT"])
 def update_products(product_id):
+    """request to update a product"""
     product = Product.find(product_id)
     if not product:
         abort(status.HTTP_404_NOT_FOUND, f"Product with id '{product_id}' was not found.")
@@ -163,6 +163,7 @@ def update_products(product_id):
 ######################################################################
 # D E L E T E   A   P R O D U C T
 ######################################################################
+
 
 @app.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_products(product_id):
